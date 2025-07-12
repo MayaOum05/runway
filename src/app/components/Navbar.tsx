@@ -1,16 +1,13 @@
-import React from "react";
+import React from 'react';
+import Link from 'next/link';
+import styles from './Navbar.module.css';
 
-export const Navbar: React.FC = () => {
+export default function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <a href="/">Runway</a>
-      </div>
-      <ul className="navbar-menu">
-        <li><a href="/home">Search</a></li>
-        <li><a href="/about">Add</a></li>
-        <li><a href="/contact">Favorite</a></li>
-      </ul>
+    <nav className={styles.navbar}>
+      <Link href="/">Feed</Link>
+      <Link href="/search">Search</Link>
+      <Link href="/saved">Saved</Link>
     </nav>
   );
 }
