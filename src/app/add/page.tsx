@@ -1,5 +1,4 @@
-import AddPost from "@/app/components/AddPost";
-
+"use client";
 export default function AddPage() {
-  return <AddPost onClose={() => {}} />;
+  return <div>Add page placeholder</div>;
 }
