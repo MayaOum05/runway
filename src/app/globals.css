@@ -6,10 +6,7 @@ body {
   background-color: black;
 }
 
-
-
 .phone-frame {
-  position: relative;
   width: 393px;
   height: 852px;
   padding: 0;
@@ -31,7 +28,7 @@ body {
   background: #f4f3f1;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  padding-bottom: 60px; 
+  padding-bottom: 0;  
   border-radius: 50px;
   &::-webkit-scrollbar {
     width: 6px;
@@ -59,15 +56,3 @@ body {
   position: relative; 
   z-index: 10;
 }
-
-.room-label button {
-  font-size: 18px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  background-color: #d8959b;
-  color: white;
-  border: none;
-  cursor: pointer;
-  /* add margin or shadow if you want */
-}
-

@@ -3,35 +3,24 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ onAddPostClick }: { onAddPostClick: () => void }) {
   const router = useRouter();
 
   return (
     <div className="navbar">
-      <button
-        className="nav-button"
-        onClick={() => router.push("/search")}
-        aria-label="Go to Search"
-      >
+      <button className="nav-button" onClick={() => router.push("/")}>
+        <img src="/images/home.png" alt="Home" className="nav-icon" />
+      </button>
+      <button className="nav-button" onClick={() => router.push("/search")}>
         <img src="/images/search.png" alt="Search" className="nav-icon" />
       </button>
 
-      <button
-        className="nav-button"
-        onClick={() => router.push("/add")}  
-        aria-label="Go to Add"
-      >
-        <img src="/images/plus.png" alt="Add" className="nav-icon" />
+      <button className="nav-button" onClick={onAddPostClick}>
+        <img src="/images/plus.png" alt="Add Post" className="nav-icon" />
       </button>
-
-      <button
-        className="nav-button"
-        onClick={() => router.push("/favorites")} 
-        aria-label="Go to Favorites"
-      >
-        <img src="/images/favorited.png" alt="Favorites" className="nav-icon" />
+      <button className="nav-button" onClick={() => router.push("/auth")}>
+      Logout
       </button>
     </div>
   );
 }
-

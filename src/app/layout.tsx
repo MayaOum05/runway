@@ -2,8 +2,10 @@ import './globals.css'
 import type { Metadata } from 'next'
 import React from 'react';
 
+import FavoritesProvider from './components/FavoriteContext';
+
 export const metadata: Metadata = {
-  title: 'Runway - Beauty & Fashion App',
+  title: 'Runway',
   description: 'See outfit and makeup details, save your favorite looks to your own board!',
 }
 

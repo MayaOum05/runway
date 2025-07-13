@@ -1,7 +1,10 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
+import React, { useState } from "react";
 import "./Search.css";
+import Navbar from "./Navbar";
+import QuestionsList from "./QuestionsList";
+import QuestionModal from "./QuestionModal";
+
 
 interface Post {
   id: string;
@@ -9,117 +12,169 @@ interface Post {
   imageUrl: string;
   profileImageUrl?: string;
   items?: string[];
-  comments: Comment[];
+  comments: { username: string; text: string }[];
+  categories?: string[]; 
 }
 
-interface Comment {
-  username: string;
-  text: string;
-}
 
 interface Question {
   id: string;
   text: string;
 }
 
+
+
+
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [fashionQuestionsSearch, setFashionQuestionsSearch] = useState("");
+  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
 
-  useEffect(() => {
-    const mockPosts: Post[] = [
-      {
-        id: "1",
-        username: "@just.clari1215",
-        profileImageUrl: "/images/hellokitty.jpg",
-        items: ["Lipstick: ELF", "Eyeliner: Maybeline", "Foundation: FitME"],
-        imageUrl: "/images/glam.jpg",
-        comments: [],
-      },
-      {
-        id: "2",
-        username: "@pluto_a_planet",
-        profileImageUrl: "/images/keroppi.jpg",
-        items: ["Shein | Brown Tube-Top", "H&M | Cargo Skirt", "Gucci | Tote Bag"],
-        imageUrl: "/images/summer.jpg",
-        comments: [],
-      },
-    ];
 
-    const mockQuestions: Question[] = [
-      { id: "q1", text: "How to find the right foundation shade?" },
-      { id: "q2", text: "Best budget-friendly lipsticks?" },
-      { id: "q3", text: "How to style cargo skirts?" },
-    ];
+  const [questions, setQuestions] = useState<Question[]>([
+    { id: "q1", text: "How do I style oversized jackets?" },
+    { id: "q2", text: "What shoes go with midi skirts?" },
+  ]);
 
-    setPosts(mockPosts);
-    setFilteredPosts(mockPosts.slice(0, 4)); 
-    setQuestions(mockQuestions);
-  }, []);
+  const recommendedPosts: Post[] = [
+    {
+      id: "1",
+      username: "@Riceypoo",
+      profileImageUrl: "/images/snoopy.jpg",
+      imageUrl: "/images/casual.jpg",
+      comments: [],
+      categories: ["Tomboy"],
+    },
+    {
+      id: "2",
+      username: "@TrinkyWink",
+      profileImageUrl: "/images/meow.jpg",
+      imageUrl: "/images/gentle.jpg",
+      comments: [],
+      categories: ["Blush"],
+    },
+    {
+      id: "3",
+      username: "@ImBatman",
+      profileImageUrl: "/images/toro.jpg",
+      imageUrl: "/images/dark.jpg",
+      comments: [],
+      categories: ["Everyday"]
+    },
+    {
+      id: "4",
+      username: "@LiloandStitch",
+      profileImageUrl: "/images/aliencat.jpg",
+      imageUrl: "/images/grunge.jpg",
+      comments: [],
+      categories: ["Grunge"]
+    },
+    {
+      id: "5",
+      username: "@Bobo_TheDawg",
+      profileImageUrl: "/images/pingu.jpg",
+      imageUrl: "/images/gyaru.jpg",
+      comments: [],
+      categories: ["Gyaru"]
+    },{
+      id: "6",
+      username: "@SunnySideUp",
+      profileImageUrl: "/images/elephant.jpg",
+      imageUrl: "/images/douyin.jpg",
+      comments: [],
+      categories: ["Grunge"]
+    },
+  ];
 
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredPosts(posts.slice(0, 4));
-      return;
-    }
-    const lower = searchTerm.toLowerCase();
-    const filtered = posts.filter(post =>
-      post.username.toLowerCase().includes(lower) ||
-      post.items?.some(item => item.toLowerCase().includes(lower))
+  const handleAddQuestion = () => {
+    if (fashionQuestionsSearch.trim() === "") return;
+
+    const newQuestion: Question = {
+      id: `q${Date.now()}`,
+      text: fashionQuestionsSearch.trim(),
+      username: "You", 
+      replies: [],
+    };
+
+    setQuestions(prev => [newQuestion, ...prev]);
+    setFashionQuestionsSearch("");
+  };
+
+  const handleDeleteQuestion = (id: string) => {
+    setQuestions(prev => prev.filter(q => q.id !== id));
+    if (selectedQuestion?.id === id) setSelectedQuestion(null);
+  };
+
+  const handleAddReply = (questionId: string, replyText: string) => {
+    setQuestions(prev =>
+      prev.map(q =>
+        q.id === questionId
+          ? {
+              ...q,
+              replies: [...q.replies, { id: `r${Date.now()}`, username: "You", text: replyText }],
+            }
+          : q
+      )
     );
-    setFilteredPosts(filtered.slice(0, 4));
-  }, [searchTerm, posts]);
+  };
 
   return (
     <div className="search-page">
-      <div className="search-content">
+      <div className="search-top-section">
         <input
           type="text"
           placeholder="Search posts..."
-          className="search-input"
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          aria-label="Search posts"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
         />
 
         <div className="recommended-posts">
-          {filteredPosts.map(post => (
+          {recommendedPosts.map((post) => (
             <div key={post.id} className="recommended-post-card">
-              <img
-                src={post.imageUrl}
-                alt="Post"
-                className="recommended-post-image"
-              />
+              <div className="image-hover-wrapper">
+                <img
+                  src={post.imageUrl}
+                  alt="Recommended post"
+                  className="recommended-post-image"
+                />
+                <div className="overlay-text">{post.categories?.join(", ")}</div>
+              </div>
               <div className="recommended-post-username">{post.username}</div>
             </div>
           ))}
         </div>
-
-        <div className="forum-search-section">
-          <input
-            type="text"
-            placeholder="Got any fashion questions?"
-            className="forum-search-input"
-            aria-label="Search fashion questions"
-          />
-
-          <div className="suggested-questions">
-            {questions.map(q => (
-              <button
-                key={q.id}
-                className="suggested-question-btn"
-                onClick={() => {
-                  alert(`Go to thread: ${q.text}`);
-                }}
-              >
-                {q.text}
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
+
+      <div className="search-bottom-section">
+        <input
+          type="text"
+          placeholder="Got any fashion questions?"
+          value={fashionQuestionsSearch}
+          onChange={(e) => setFashionQuestionsSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleAddQuestion();
+            }
+          }}
+          className="search-bar"
+        />
+
+        <QuestionsList
+          questions={questions}
+          onQuestionClick={setSelectedQuestion}
+          onDeleteQuestion={handleDeleteQuestion}
+        />
+      </div>
+
+      {selectedQuestion && (
+        <QuestionModal
+          question={selectedQuestion}
+          onClose={() => setSelectedQuestion(null)}
+          onAddReply={handleAddReply}
+        />
+      )}
+
       <Navbar />
     </div>
   );

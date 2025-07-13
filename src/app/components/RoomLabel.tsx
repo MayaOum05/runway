@@ -29,7 +29,6 @@ export default function RoomLabel({ label, targetPath }: RoomLabelProps) {
           borderRadius: '25px',
           display: 'flex',
           justifyContent: 'center',
-          marginTop: '1.5em',
           padding: '12px 0',
           margin: '0 auto',
           boxSizing: 'border-box',

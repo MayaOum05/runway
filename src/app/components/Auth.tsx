@@ -78,7 +78,6 @@ export default function Auth() {
             <RoomLabel label="Casual-Chic" targetPath="/search" />
             <Posts />
           </div>
-          <Navbar />
         </>
       ) : (
         <div className="auth-card">

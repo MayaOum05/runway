@@ -1,7 +1,14 @@
+"use client";
+
 import React from 'react';
 
 // components
 import Auth from './components/Auth'; 
+import Posts from "./components/Posts";
+import AddPost from "./components/AddPost";
+import Navbar from "./components/Navbar";
+
+
 
 export default function Home() {
   return (
@@ -10,6 +17,7 @@ export default function Home() {
         <div className="phone-screen">
           <Auth />
         </div>
+        <Navbar onAddPostClick={() => {}} />
       </div>
     </main>
   );
