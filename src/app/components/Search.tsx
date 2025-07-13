@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import "./Search.css";
-import Navbar from "./Navbar";
 
 import type { Question } from "../types/Question";
 
