@@ -1,18 +1,24 @@
+
+
 .posts-container::-webkit-scrollbar {
   display: none;
 }
 
 .posts-container {
-  -ms-overflow-style: none; 
-  scrollbar-width: none;  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;  
+  width: 100%;     
+  max-width: none; 
+  padding: 0 10px
 }
 
 
 .post-card {
   text-align: center;
   padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;  box-shadow: 5px 10px 10px rgba(0,0,0,0.1);
   background: white;
 }
 
@@ -24,25 +30,24 @@
 }
 
 .post-profile-pic {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 8px;
-  border: 1px solid #ddd;
+  margin-right: 10px;
 }
 
 .post-username {
   font-family: 'Inter', sans-serif;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   color: #829672;
 }
 
 .post-image {
-  width:100%;
+  width: calc(100% - 20px);
   height: auto;
-  padding: 5px;
+  border-radius: 4px;
   margin: 0 auto;
   display: block;
   object-fit: cover;
@@ -62,7 +67,7 @@
   font-size: 21px;
   color: #829672;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 
 .toggle-comments-btn {
@@ -87,7 +92,8 @@
 
 .post-comment {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: bold;
   color: #D8959B;
   border-top: 1px solid #eee;
   padding: 6px 0;
@@ -96,7 +102,39 @@
 
 
 .comment-username {
-  font-weight: 700;
-  color: #344C3D;
+  font-weight: 900px;
+  color: #829672;
   margin-right: 6px;
+}
+
+.divider {
+  border: 1.5px solid #D8959B;
+  margin: 8px 0;
+}
+
+.post-image-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.favorite-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #f2d1d4;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;   /* ensures it stays on top */
+}
+
+.favorite-icon {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
 }

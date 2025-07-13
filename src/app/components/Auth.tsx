@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, on
 import './Auth.css';
 import Posts from './Posts';
 import RoomLabel from './RoomLabel';
+import Navbar from "./Navbar";
 
 export default function Auth() {
   const [email, setEmail] = useState("")
@@ -70,20 +71,18 @@ export default function Auth() {
   }
 
     return (
-    <div className="auth-card">
-
-      {error && <div className="error-alert">{error}</div>}
-
+    <>
       {user ? (
         <>
-          <RoomLabel label="Rooms" targetPath="/search" />
-
-
-
-          <Posts />
+          <div className="phone-screen">
+            <RoomLabel label="Casual-Chic" targetPath="/search" />
+            <Posts />
+          </div>
+          <Navbar />
         </>
       ) : (
-        <>
+        <div className="auth-card">
+          {error && <div className="error-alert">{error}</div>}
           <input
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -99,10 +98,9 @@ export default function Auth() {
           />
           <button onClick={login} className="auth-button">Login</button>
           <button onClick={signup} className="auth-button">Sign Up</button>
-        </>
+        </div>
       )}
-
-    </div>
+    </>
   );
 
 }
