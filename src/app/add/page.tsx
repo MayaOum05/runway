@@ -1,20 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
-import AddPost from "../components/AddPost";
+import AddPost from "@/app/components/AddPost";
 
 export default function AddPage() {
-  const [showAddPost, setShowAddPost] = useState(true);
-
-  return (
-    <>
-      {showAddPost && (
-        <AddPost
-          onClose={() => {
-            setShowAddPost(false);
-          }}
-        />
-      )}
-    </>
-  );
+  return <AddPost onClose={() => {}} />;
 }
