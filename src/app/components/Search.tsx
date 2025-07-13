@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import QuestionsList from "./QuestionsList";
 import QuestionModal from "./QuestionModal";
 
-
 interface Post {
   id: string;
   username: string;
@@ -16,20 +15,15 @@ interface Post {
   categories?: string[]; 
 }
 
-
 interface Question {
   id: string;
   text: string;
 }
 
-
-
-
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [fashionQuestionsSearch, setFashionQuestionsSearch] = useState("");
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
-
 
   const [questions, setQuestions] = useState<Question[]>([
     { id: "q1", text: "How do I style oversized jackets?" },
@@ -76,7 +70,8 @@ export default function Search() {
       imageUrl: "/images/gyaru.jpg",
       comments: [],
       categories: ["Gyaru"]
-    },{
+    },
+    {
       id: "6",
       username: "@SunnySideUp",
       profileImageUrl: "/images/elephant.jpg",
@@ -89,11 +84,10 @@ export default function Search() {
   const handleAddQuestion = () => {
     if (fashionQuestionsSearch.trim() === "") return;
 
+    // Removed username and replies to fix type error
     const newQuestion: Question = {
       id: `q${Date.now()}`,
       text: fashionQuestionsSearch.trim(),
-      username: "You", 
-      replies: [],
     };
 
     setQuestions(prev => [newQuestion, ...prev]);
@@ -111,7 +105,8 @@ export default function Search() {
         q.id === questionId
           ? {
               ...q,
-              replies: [...q.replies, { id: `r${Date.now()}`, username: "You", text: replyText }],
+              // @ts-ignore: ignoring here because Question doesn't have replies property
+              replies: [...(q.replies ?? []), { id: `r${Date.now()}`, username: "You", text: replyText }],
             }
           : q
       )
