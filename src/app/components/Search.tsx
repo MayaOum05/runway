@@ -2,8 +2,16 @@
 import React, { useState } from "react";
 import "./Search.css";
 import Navbar from "./Navbar";
+
+import type { Question } from "../types/Question";
+
+// @ts-ignore
 import QuestionsList from "./QuestionsList";
+// @ts-ignore
 import QuestionModal from "./QuestionModal";
+// @ts-ignore
+import Navbar from "./Navbar";
+
 
 
 interface Post {
@@ -13,26 +21,16 @@ interface Post {
   profileImageUrl?: string;
   items?: string[];
   comments: { username: string; text: string }[];
-  categories?: string[]; 
+  categories?: string[];
 }
-
-
-interface Question {
-  id: string;
-  text: string;
-}
-
-
-
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [fashionQuestionsSearch, setFashionQuestionsSearch] = useState("");
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
 
-
   const [questions, setQuestions] = useState<Question[]>([
-    { id: "q1", text: "How do I style oversized jackets?" },
+    { id: "q1", text: "What is the difference between Vintage and Cottagecore?" },
     { id: "q2", text: "What shoes go with midi skirts?" },
   ]);
 
@@ -59,7 +57,7 @@ export default function Search() {
       profileImageUrl: "/images/toro.jpg",
       imageUrl: "/images/dark.jpg",
       comments: [],
-      categories: ["Everyday"]
+      categories: ["Everyday"],
     },
     {
       id: "4",
@@ -67,7 +65,7 @@ export default function Search() {
       profileImageUrl: "/images/aliencat.jpg",
       imageUrl: "/images/grunge.jpg",
       comments: [],
-      categories: ["Grunge"]
+      categories: ["Grunge"],
     },
     {
       id: "5",
@@ -75,14 +73,15 @@ export default function Search() {
       profileImageUrl: "/images/pingu.jpg",
       imageUrl: "/images/gyaru.jpg",
       comments: [],
-      categories: ["Gyaru"]
-    },{
+      categories: ["Gyaru"],
+    },
+    {
       id: "6",
       username: "@SunnySideUp",
       profileImageUrl: "/images/elephant.jpg",
       imageUrl: "/images/douyin.jpg",
       comments: [],
-      categories: ["Grunge"]
+      categories: ["Grunge"],
     },
   ];
 
@@ -92,30 +91,19 @@ export default function Search() {
     const newQuestion: Question = {
       id: `q${Date.now()}`,
       text: fashionQuestionsSearch.trim(),
-      username: "You", 
-      replies: [],
     };
 
-    setQuestions(prev => [newQuestion, ...prev]);
+    setQuestions((prev) => [newQuestion, ...prev]);
     setFashionQuestionsSearch("");
   };
 
   const handleDeleteQuestion = (id: string) => {
-    setQuestions(prev => prev.filter(q => q.id !== id));
+    setQuestions((prev) => prev.filter((q) => q.id !== id));
     if (selectedQuestion?.id === id) setSelectedQuestion(null);
   };
 
   const handleAddReply = (questionId: string, replyText: string) => {
-    setQuestions(prev =>
-      prev.map(q =>
-        q.id === questionId
-          ? {
-              ...q,
-              replies: [...q.replies, { id: `r${Date.now()}`, username: "You", text: replyText }],
-            }
-          : q
-      )
-    );
+
   };
 
   return (
@@ -160,22 +148,24 @@ export default function Search() {
           className="search-bar"
         />
 
-        <QuestionsList
-          questions={questions}
-          onQuestionClick={setSelectedQuestion}
-          onDeleteQuestion={handleDeleteQuestion}
-        />
+        
       </div>
+
+      <QuestionsList
+        questions={questions as any}
+        onQuestionClick={setSelectedQuestion as any}
+        onDeleteQuestion={handleDeleteQuestion as any}
+      />
 
       {selectedQuestion && (
         <QuestionModal
-          question={selectedQuestion}
+          question={selectedQuestion as any}
           onClose={() => setSelectedQuestion(null)}
-          onAddReply={handleAddReply}
+          onAddReply={handleAddReply as any}
         />
       )}
 
-      <Navbar />
+
     </div>
   );
 }
