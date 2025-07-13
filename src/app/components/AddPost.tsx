@@ -25,7 +25,6 @@ export default function AddPost({ onClose }: { onClose: () => void }) {
     }
   };
 
-  // Helper to convert file to base64 string
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -49,7 +48,7 @@ export default function AddPost({ onClose }: { onClose: () => void }) {
       const items = itemsText.split(",").map(item => item.trim()).filter(Boolean);
       const newPost = {
         id: Date.now().toString(),
-        imageUrl: base64Image, // Save base64 image string here
+        imageUrl: base64Image,
         items,
         username: "@You",
         comments: [],
