@@ -1,15 +1,15 @@
 .navbar {
   display: flex;
   justify-content: space-around;
-  background: #f7f7f7;
+  background: #f4f3f1;
   padding: 12px;
   position: fixed;
   bottom: 0;
   width: 100%;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #f4f3f1;
 }
 
 .navbar a {
   text-decoration: none;
-  color: #333;
+  color: #344c3d;
 }

@@ -1,0 +1,30 @@
+.card-container {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card-container h2 {
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+
+.card-button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff69b4; /* pinkish runway vibe */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card-button:last-child {
+  background-color: #ffa7c4; /* slightly lighter pink for Sign Up */
+}

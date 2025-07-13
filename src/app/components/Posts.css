@@ -1,0 +1,102 @@
+.posts-container::-webkit-scrollbar {
+  display: none;
+}
+
+.posts-container {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+
+.post-card {
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.post-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  justify-content: flex-start; 
+}
+
+.post-profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+}
+
+.post-username {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: #829672;
+}
+
+.post-image {
+  width:100%;
+  height: auto;
+  padding: 5px;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
+}
+
+.post-items-list {
+  color: #829672;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  text-align: left;
+}
+
+.post-item {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 21px;
+  color: #829672;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.toggle-comments-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; 
+  background: none;
+  color: #D8959B;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 4px;
+  text-align: left;
+  padding: 0;
+}
+
+.post-comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  text-align: left;
+}
+
+.post-comment {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #D8959B;
+  border-top: 1px solid #eee;
+  padding: 6px 0;
+  text-align: left;
+}
+
+
+.comment-username {
+  font-weight: 700;
+  color: #344C3D;
+  margin-right: 6px;
+}
